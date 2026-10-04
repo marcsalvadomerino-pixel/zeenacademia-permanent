@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zeenacademia.netlify.app/sitemap.xml
