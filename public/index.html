@@ -45,6 +45,7 @@
     <script>
       (() => {
         const ecosystemUrl = "https://zeentinelia-iq3xb4ed.manus.space/#ecosistema";
+        const poolLandingUrl = "https://piscinas-95vs3hjd.manus.space";
         const openEcosystemSeparately = () => {
           document.querySelectorAll(`a[href="${ecosystemUrl}"]`).forEach((link) => {
             link.target = "_blank";
@@ -52,12 +53,24 @@
             link.setAttribute("aria-label", "Obrir l'Ecosistema Zeentinelia en una pestanya nova");
           });
         };
+        const openPoolLanding = () => {
+          document.querySelectorAll('a[href="/mantenimiento-piscinas"]').forEach((link) => {
+            link.href = poolLandingUrl;
+            link.target = "_self";
+            link.removeAttribute("rel");
+            link.setAttribute("aria-label", "Obrir la landing de Manteniment de Piscines");
+          });
+        };
 
         const root = document.getElementById("root");
         if (root) {
-          new MutationObserver(openEcosystemSeparately).observe(root, { childList: true, subtree: true });
+          new MutationObserver(() => {
+            openEcosystemSeparately();
+            openPoolLanding();
+          }).observe(root, { childList: true, subtree: true });
         }
         openEcosystemSeparately();
+        openPoolLanding();
       })();
     </script>
   </body>
