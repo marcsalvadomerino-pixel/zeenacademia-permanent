@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Añadir la URL absoluta del sitemap al activar el dominio público definitivo.
