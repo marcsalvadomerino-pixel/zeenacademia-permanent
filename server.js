@@ -46,6 +46,14 @@ const server = createServer(async (request, response) => {
       await send(requested, response);
       return;
     }
+    if (info?.isDirectory()) {
+      const indexFile = path.join(requested, "index.html");
+      const indexInfo = await stat(indexFile).catch(() => null);
+      if (indexInfo?.isFile()) {
+        await send(indexFile, response);
+        return;
+      }
+    }
     const fallback = path.join(root, "index.html");
     await send(fallback, response);
   } catch (error) {
