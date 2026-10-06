@@ -29,13 +29,24 @@ function safePath(urlPath) {
   return path.join(root, normalized.replace(/^[/\\]+/, ""));
 }
 
-async function send(filePath, response) {
+async function send(filePath, response, status = 200) {
   const extension = path.extname(filePath).toLowerCase();
-  response.writeHead(200, {
+  response.writeHead(status, {
     "Cache-Control": extension === ".html" ? "no-cache" : "public, max-age=31536000, immutable",
     "Content-Type": mime[extension] || "application/octet-stream",
   });
   response.end(await readFile(filePath));
+}
+
+async function sendNotFound(response) {
+  const notFound = path.join(root, "404.html");
+  const exists = await stat(notFound).catch(() => null);
+  if (exists?.isFile()) {
+    await send(notFound, response, 404);
+    return;
+  }
+  response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+  response.end("Page not found");
 }
 
 const server = createServer(async (request, response) => {
@@ -54,8 +65,7 @@ const server = createServer(async (request, response) => {
         return;
       }
     }
-    const fallback = path.join(root, "index.html");
-    await send(fallback, response);
+    await sendNotFound(response);
   } catch (error) {
     console.error(error);
     response.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });

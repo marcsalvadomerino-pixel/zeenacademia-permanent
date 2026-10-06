@@ -140,9 +140,6 @@ document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
   field?.addEventListener("input", updateFundaeEstimate);
 });
 
-const isPreview = location.hostname.includes("manus.computer") || location.hostname === "localhost";
-const isSuccessState = new URLSearchParams(location.search).get("success") === "1";
-
 function showConfirmation() {
   if (!form || !success) return;
   form.hidden = true;
@@ -150,8 +147,32 @@ function showConfirmation() {
   success.focus();
 }
 
-if (isSuccessState) {
-  showConfirmation();
+function getSelectedLabel(select) {
+  return select?.selectedOptions?.[0]?.textContent?.trim() || "No indicat";
+}
+
+function openEmailDraft() {
+  if (!form) return;
+  const data = new FormData(form);
+  const lines = [
+    "Sol·licitud d’orientació — Manteniment de Piscines SEA757_2",
+    "",
+    `Nom: ${data.get("nom") || "No indicat"}`,
+    `Telèfon: ${data.get("telefon") || "No indicat"}`,
+    `Correu: ${data.get("email") || "No indicat"}`,
+    `Perfil: ${getSelectedLabel(applicantType)}`,
+    `Municipi: ${data.get("municipi") || "No indicat"}`,
+    `Necessitat: ${getSelectedLabel(interest)}`,
+  ];
+
+  if (data.get("fundae-plantilla")) {
+    lines.push(`Plantilla FUNDAE: ${data.get("fundae-plantilla")}`);
+    lines.push(`Base d’altres cotitzacions: ${data.get("fundae-base-cotitzacions") || "No indicada"}`);
+    lines.push(`Crèdit FUNDAE estimat: ${data.get("fundae-credit-estimat") || "No disponible"}`);
+  }
+
+  const subject = "Consulta d’orientació — Manteniment de Piscines";
+  window.location.href = `mailto:groupzeen@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
 }
 
 if (form) {
@@ -163,11 +184,10 @@ if (form) {
       return;
     }
 
+    event.preventDefault();
     track("form_submit");
-    if (isPreview) {
-      event.preventDefault();
-      showConfirmation();
-    }
+    openEmailDraft();
+    showConfirmation();
   });
 }
 
