@@ -42,5 +42,23 @@
       </main>
     </noscript>
     <script type="module" crossorigin src="/assets/index.e938457.js"></script>
+    <script>
+      (() => {
+        const ecosystemUrl = "https://zeentinelia-iq3xb4ed.manus.space/#ecosistema";
+        const openEcosystemSeparately = () => {
+          document.querySelectorAll(`a[href="${ecosystemUrl}"]`).forEach((link) => {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.setAttribute("aria-label", "Obrir l'Ecosistema Zeentinelia en una pestanya nova");
+          });
+        };
+
+        const root = document.getElementById("root");
+        if (root) {
+          new MutationObserver(openEcosystemSeparately).observe(root, { childList: true, subtree: true });
+        }
+        openEcosystemSeparately();
+      })();
+    </script>
   </body>
 </html>
