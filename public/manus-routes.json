@@ -1,1 +1,10 @@
-{"routes":[{"path":"/","title":"ZEENACADEMIA"},{"path":"/mantenimiento-piscinas","title":"Mantenimiento de piscinas · 350 horas | ZEENACADEMIA"},{"path":"/mantenimiento-piscinas/privacitat","title":"Política de privacidad | ZEENACADEMIA"},{"path":"/mantenimiento-piscinas/cookies","title":"Política de cookies | ZEENACADEMIA"},{"path":"/mantenimiento-piscinas/aviso-legal","title":"Aviso legal | ZEENACADEMIA"},{"path":"/aviso-legal","title":"Aviso legal"},{"path":"/privacitat","title":"Política de privacidad"},{"path":"/cookies","title":"Política de cookies"}]}
+{
+  "routes": [
+    { "path": "/", "title": "ZEENACADEMIA" },
+    { "path": "/mantenimiento-piscinas", "title": "Mantenimiento de Piscinas y Instal·lacions Aquàtiques" },
+    { "path": "/ecosistema", "title": "Cinc corrents, una missió" },
+    { "path": "/aviso-legal", "title": "Avís legal" },
+    { "path": "/privacitat", "title": "Política de privacitat" },
+    { "path": "/cookies", "title": "Política de cookies" }
+  ]
+}

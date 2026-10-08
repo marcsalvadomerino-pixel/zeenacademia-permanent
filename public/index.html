@@ -2,83 +2,42 @@
 <html lang="ca">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZEENACADEMIA | Formació Professional i Seguretat Aquàtica</title>
-    <meta name="description" content="ZEENACADEMIA — Itineraris professionals en socorrisme, seguretat marítima, natació, emergències, docència i manteniment d’instal·lacions aquàtiques a Catalunya." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="theme-color" content="#06192c" />
+    <meta name="description" content="ZEENACADEMIA: formació professional, seguretat aquàtica i manteniment d'instal·lacions." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ZEENACADEMIA" />
     <meta property="og:title" content="ZEENACADEMIA | Formació Professional i Seguretat Aquàtica" />
-    <meta property="og:description" content="ZEENACADEMIA — Itineraris professionals en socorrisme, seguretat marítima, natació, emergències, docència i manteniment d’instal·lacions aquàtiques a Catalunya." />
     <meta property="og:url" content="https://zeentinelia.com/" />
-    <meta property="og:image" content="https://zeentinelia.com/assets/hero-rescue.webp" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ZEENACADEMIA | Formació Professional i Seguretat Aquàtica" />
-    <meta name="twitter:description" content="ZEENACADEMIA — Itineraris professionals en socorrisme, seguretat marítima, natació, emergències, docència i manteniment d’instal·lacions aquàtiques a Catalunya." />
-    <meta name="twitter:image" content="https://zeentinelia.com/assets/hero-rescue.webp" />
-    <link rel="canonical" href="https://zeentinelia.com/" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2BXDZZWZQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-X2BXDZZWZQ');
-    </script>
+    <title>ZEENACADEMIA | Formació Professional i Seguretat Aquàtica</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="/assets/zeenacademia-logo.png" />
-    <link rel="stylesheet" crossorigin href="/assets/index.css" />
+    <link rel="stylesheet" href="/production/academy-production.css" />
     <script>
-      (() => {
-        const legalPaths = new Set(["/aviso-legal", "/privacitat", "/cookies"]);
-        const path = window.location.pathname.replace(/\/+$/, "") || "/";
-        if (legalPaths.has(path)) {
-          window.location.replace(`${path}/index.html${window.location.search}${window.location.hash}`);
-        }
-      })();
+      window.dataLayer = window.dataLayer || [];
+      window.__ZEENTINEL_LOAD_ANALYTICS__ = function () {
+        if (window.__ZEENTINEL_GA4_LOADED__) return;
+        window.__ZEENTINEL_GA4_LOADED__ = true;
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', 'G-X2BXDZZWZQ', {
+          anonymize_ip: true,
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false
+        });
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-X2BXDZZWZQ';
+        document.head.appendChild(script);
+      };
+      if (window.localStorage.getItem('zeentinel-analytics-consent') === 'accepted') {
+        window.__ZEENTINEL_LOAD_ANALYTICS__();
+      }
     </script>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>
-      <main>
-        <h1>ZEENACADEMIA: formació professional i seguretat aquàtica</h1>
-        <p>Itineraris de socorrisme, seguretat marítima, natació, emergències, docència i manteniment d’instal·lacions aquàtiques a Catalunya.</p>
-        <p><a href="/mantenimiento-piscinas">Consulta el curs de Manteniment de Piscines i Instal·lacions Aquàtiques (SEA757_2, 350 hores).</a></p>
-        <p>Contacte: <a href="tel:+34640762525">640 76 25 25</a> · <a href="mailto:groupzeen@gmail.com">groupzeen@gmail.com</a></p>
-      </main>
-    </noscript>
-    <script type="module" crossorigin src="/assets/index.2586df9a.js"></script>
-    <script>
-      (() => {
-        const ecosystemUrl = "https://zeentinelia-iq3xb4ed.manus.space/#ecosistema";
-        const poolLandingUrl = "https://piscinas-95vs3hjd.manus.space";
-        const openEcosystemSeparately = () => {
-          document.querySelectorAll(`a[href="${ecosystemUrl}"]`).forEach((link) => {
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-            link.setAttribute("aria-label", "Obrir l'Ecosistema Zeentinelia en una pestanya nova");
-          });
-        };
-        const openPoolLanding = () => {
-          document.querySelectorAll('a[href="/mantenimiento-piscinas"]').forEach((link) => {
-            link.href = poolLandingUrl;
-            link.target = "_self";
-            link.removeAttribute("rel");
-            link.setAttribute("aria-label", "Obrir la landing de Manteniment de Piscines");
-          });
-        };
-
-        const root = document.getElementById("root");
-        if (root) {
-          new MutationObserver(() => {
-            openEcosystemSeparately();
-            openPoolLanding();
-          }).observe(root, { childList: true, subtree: true });
-        }
-        openEcosystemSeparately();
-        openPoolLanding();
-      })();
-    </script>
+    <script type="module" crossorigin src="/production/academy-production.js"></script>
   </body>
 </html>
