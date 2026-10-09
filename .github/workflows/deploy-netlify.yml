@@ -1,0 +1,50 @@
+name: Deploy catalog to Netlify
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "public/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: netlify-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy static catalog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Check Netlify credentials
+        shell: bash
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          if [[ -z "${NETLIFY_AUTH_TOKEN:-}" ]]; then
+            echo "::error::Add the NETLIFY_AUTH_TOKEN repository secret before deploying."
+            exit 1
+          fi
+          if [[ -z "${NETLIFY_SITE_ID:-}" ]]; then
+            echo "::error::Add the NETLIFY_SITE_ID repository secret before deploying."
+            exit 1
+          fi
+
+      - name: Deploy public catalog to Netlify production
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx --yes netlify-cli@latest deploy --dir=public --no-build --prod
