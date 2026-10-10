@@ -28,23 +28,18 @@ jobs:
         with:
           node-version: 22
 
-      - name: Check Netlify credentials
+      - name: Check Netlify token
         shell: bash
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
           if [[ -z "${NETLIFY_AUTH_TOKEN:-}" ]]; then
             echo "::error::Add the NETLIFY_AUTH_TOKEN repository secret before deploying."
-            exit 1
-          fi
-          if [[ -z "${NETLIFY_SITE_ID:-}" ]]; then
-            echo "::error::Add the NETLIFY_SITE_ID repository secret before deploying."
             exit 1
           fi
 
       - name: Deploy public catalog to Netlify production
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID: "561af7ec-dc9a-4a39-a596-abc294e47806"
         run: npx --yes netlify-cli@latest deploy --dir=public --no-build --prod
